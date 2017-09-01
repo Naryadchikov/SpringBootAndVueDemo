@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Vue Test Page</title>
+        <script src="https://unpkg.com/vue"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h1>{{ message }}</h1>
+            {{ userInfo }}
+            <h3><a v-bind:href="url">HomePage</a></h3>
+            <button v-on:click="changeName">Change Name</button>
+            <br><br>
+            Add Book: <input type="text" v-model="currentBook"> <button v-on:click="addBook">Add Book</button>
+            <br><br>
+            <div v-if="books.length > 0">
+                Books
+                <ul>
+                    <li v-for="book in books">{{book}}</li>
+                </ul>
+            </div>
+            <max></max>
+        </div>
+
+        <script>
+            Vue.component('max', {
+                template: '<h1>Hello from Max Component</h1>'
+            });
+
+            new Vue({
+                el: '#app',
+                data: {
+                  message: 'Alex',
+                  age: 19,
+                  currentBook: 'Default Book',
+                  books: [],
+                  url: 'https://unpkg.com/vue'
+                },
+                methods: {
+                    changeName: function() {
+                        this.message = "Sasha";
+                    },
+                    addBook: function() {
+                        this.books.push(this.currentBook);
+                    }
+                },
+                computed: {
+                    userInfo: function() {
+                        return this.message + " is " + this.age;
+                    }
+                },
+                watch: {
+                    message: function() {
+                        console.log(this.message)
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>
