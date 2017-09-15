@@ -11,15 +11,5 @@ pipeline {
         sh 'mvn clean'
       }
     }
-    stage('Build') {
-      steps {
-        sh 'mvn install'
-      }
-    }
-    stage('Report') {
-      steps {
-        junit 'testResults.xml'
-      }
-    }
   }
 }
